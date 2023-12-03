@@ -539,7 +539,7 @@ router.post('/generate-text', async (req, res) => {
     if (!userId) {
       res.redirect('/');
     } else {
-    const response = await axios.post('http://localhost:5000/openai', req.body);
+    const response = await axios.post('https://career-center-tip-python.onrender.com/openai', req.body);
     res.json(response.data);
     }
   } catch (error) {
@@ -557,7 +557,7 @@ router.get('/interview', async (req, res, next) => {
       res.redirect('/');
     } else {
       // Reset the conversation history on Flask server
-      await axios.get('http://localhost:5000/reset_conversation');
+      await axios.get('https://career-center-tip-python.onrender.com/reset_conversation');
       // Then render the interview page
       res.render('interview-simulation.ejs');
     }

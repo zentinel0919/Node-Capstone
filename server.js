@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 app.post('/simulate-interview', async (req, res) => {
   try {
     const prompt = req.body.prompt;
-    const response = await axios.post('http://localhost:5000/simulate-interview', {
+    const response = await axios.post('https://career-center-tip-python.onrender.com/simulate-interview', {
       prompt: prompt
     });
     res.json(response.data);
