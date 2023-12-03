@@ -6,9 +6,6 @@ var crypto = require('crypto');
 var prisma = new PrismaClient();
 const path = require('path');
 const Joi = require('joi');
-const Chart = require('chart.js');
-const rasaClient = require('../rasaClient');
-const smsHelper = require('../smsHelper');
 const axios = require('axios');
 const nodemailer = require('nodemailer');
 
