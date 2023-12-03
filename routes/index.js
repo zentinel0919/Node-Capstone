@@ -628,7 +628,7 @@ router.post('/', async function (req, res, next) {
           data: { 
             verificationToken: verificationToken },
         });
-        const verificationLink = `http://127.0.0.1:3000/verify?token=${verificationToken}`;
+        const verificationLink = `https://career-center-tip.onrender.com/verify?token=${verificationToken}`;
         const mailOptions = {
           from: 'careercenterstaff34@gmail.com',
           to: personInfo.email,
