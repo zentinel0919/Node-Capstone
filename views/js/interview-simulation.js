@@ -30,6 +30,8 @@ function startDictation() {
     isListening = true;
     // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
+
+    setTimeout(stopDictation, 5000);
   } else {
     stopDictation();
   }
