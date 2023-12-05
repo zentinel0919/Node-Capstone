@@ -178,7 +178,7 @@ function repeatLastMessage() {
   }
 }
 
-function displayMessage(sender, message) {
+function displayMessage(sender, message, isAssessment = false) {
   if (sender === 'Bot') {
     lastBotMessage = message;
   }
@@ -186,6 +186,10 @@ function displayMessage(sender, message) {
   const messageElement = document.createElement('div');
   messageElement.className = `${sender.toLowerCase()}-message-container`;
 
+  if (isAssessment) {
+    const assessmentModal = createAssessmentModal(message);
+    messageElement.appendChild(assessmentModal);
+  } else {
   const messageBubble = document.createElement('div');
   messageBubble.className = 'message-bubble';
   messageBubble.textContent = message;
@@ -202,11 +206,60 @@ function displayMessage(sender, message) {
   messageBubble.appendChild(messageIndicator);
 
   messageElement.appendChild(messageBubble);
+}
   chatContainer.appendChild(messageElement);
-
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+
+function createAssessmentModal(assessmentMessage) {
+  const modalContent = document.createElement('div');
+  modalContent.className = 'assessment-modal';
+
+  // Parse the assessment message to extract the scores and comments
+  const scoresRegex = /\|([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)\|/g;
+  const scoresMatch = scoresRegex.exec(assessmentMessage);
+
+  if (scoresMatch) {
+    const criteria = scoresMatch[1].trim().split(/\s+/);
+    const ratings = scoresMatch[2].trim().split(/\s+/);
+    const comments = scoresMatch[3].trim().split(/\s+/);
+
+    // Create a table to display the scores and comments
+    const table = document.createElement('table');
+    const headerRow = table.createTHead().insertRow(0);
+
+    criteria.forEach((criterion, index) => {
+      const headerCell = document.createElement('th');
+      headerCell.textContent = criterion;
+      headerRow.appendChild(headerCell);
+    });
+
+    const dataRow = table.insertRow(1);
+
+    ratings.forEach((rating, index) => {
+      const dataCell = document.createElement('td');
+      dataCell.textContent = rating;
+      dataRow.appendChild(dataCell);
+    });
+
+    // Append the table to the modal content
+    modalContent.appendChild(table);
+
+    // Add a button to close the modal
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.addEventListener('click', () => modalContent.parentElement.removeChild(modalContent));
+    modalContent.appendChild(closeButton);
+  } else {
+    // If the assessment message format is not as expected, display a generic error message
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Error: Unable to parse assessment scores.';
+    modalContent.appendChild(errorMessage);
+  }
+
+  return modalContent;
+}
 
 
 document.getElementById('interview-form').addEventListener('submit', function(event) {
