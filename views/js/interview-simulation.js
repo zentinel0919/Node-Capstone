@@ -189,6 +189,7 @@ function displayMessage(sender, message, isAssessment = false) {
   if (isAssessment) {
     const assessmentModal = createAssessmentModal(message);
     messageElement.appendChild(assessmentModal);
+    showModal(assessmentModal);
   } else {
   const messageBubble = document.createElement('div');
   messageBubble.className = 'message-bubble';
