@@ -10,14 +10,18 @@ if ('webkitSpeechRecognition' in window) {
   alert('Your browser does not support speech recognition. Please try a different browser.');
 }
 
-recognition.continuous = false;
-recognition.interimResults = false;
+recognition.continuous = true;  // Enable continuous recognition
+recognition.interimResults = true;  // Enable interim results
 recognition.lang = "en-US";
 
 recognition.onresult = function(e) {
   const userMessageInput = document.getElementById('user-prompt');
-  userMessageInput.value = e.results[0][0].transcript;
-  stopDictation();
+  let fullTranscript = "";
+  for (let i = 0; i < e.results.length; i++) {
+    fullTranscript += e.results[i][0].transcript;
+  }
+  
+  userMessageInput.value = fullTranscript;
 };
 
 recognition.onerror = function(e) {
@@ -31,7 +35,6 @@ function startDictation() {
     // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
 
-    setTimeout(stopDictation, 5000);
   } else {
     stopDictation();
   }
