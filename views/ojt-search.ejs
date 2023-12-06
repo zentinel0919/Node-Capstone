@@ -60,6 +60,7 @@
                 </p>
                 <p class="job-company">Company: <%= job.company %></p>
                 <p class="job-program">Program: <%= job.program %></p>
+                <p class="job-location">Location: <%= job.location %></p>
                 <button class="favorite-button" onclick="addToFavorite('<%= job.id %>')">
                   <i class="favorite-icon">Save to Favorite</i>
                 </button>
@@ -71,7 +72,7 @@
         
   
   <h2>Job List</h2><br>
-  <input type="text" id="searchInput" placeholder="Search by company or job title" onkeyup="filterJobs()">
+  <input type="text" id="searchInput" placeholder="Search by company, title, program, or location" onkeyup="filterJobs()">
   <div class="recommendation">
   <div class="job-list">
     <% jobs.forEach(function(job) { %>
@@ -80,8 +81,9 @@
           <p class="job-title">
             <a class="job-title-link" href="/jobs/<%= job.id %>"><%= job.title %></a>
             </p>
-          <p class="job-company">Company: <%= job.company %></p>
-          <p class="job-program">Program: <%= job.program %></p>
+            <p class="job-company">Company: <%= job.company %></p>
+            <p class="job-program">Program: <%= job.program %></p>
+            <p class="job-location">Location: <%= job.location %></p>
           <button class="favorite-button"  onclick="addToFavorite('<%= job.id %>')">
             <i class="favorite-icon">Save to Favorite</i>
         </div>
@@ -93,11 +95,10 @@
     <h3>Filter by Program:</h3>
     <ul id="programList">
       <li><a href="#" onclick="filterJobsByProgram('')">All Programs</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Business & Management')">Business & Management</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Creative Arts')">Creative Arts</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Engineering & Mathematics')">Engineering & Mathematics</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('IT & Computer Science')">IT & Computer Science</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Teacher & Education')">Teacher & Education</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Business Education')">Business Education</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Arts')">Arts</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Engineering & Architecture')">Engineering & Architecture</a></li>
+      <li><a href="#" onclick="filterJobsByProgram('Computer Studies')">Computer Studies</a></li>
     </ul>
   </div>
   
@@ -112,9 +113,11 @@
           // Iterate through each book item and hide/show based on the filter
           for (let i = 0; i < jobItems.length; i++) {
             const title = jobItems[i].querySelector('.job-title').textContent.toLowerCase();
-            const author = jobItems[i].querySelector('.job-company').textContent.toLowerCase();
+            const company = jobItems[i].querySelector('.job-company').textContent.toLowerCase();
+            const program = jobItems[i].querySelector('.job-program').textContent.toLowerCase();
+            const location = jobItems[i].querySelector('.job-location').textContent.toLowerCase();
 
-            if (title.includes(filter) || author.includes(filter)) {
+            if (title.includes(filter) || company.includes(filter) || location.includes(filter) || program.includes(filter)) {
               jobItems[i].style.display = 'flex';
             } else {
               jobItems[i].style.display = 'none';

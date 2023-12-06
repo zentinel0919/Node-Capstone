@@ -95,9 +95,7 @@ function getCurrentWord(charIndex, text) {
 }
 
 function getExpressionForWord(word) {
-  // Map specific words to their corresponding expressions
   const pronunciationMap = {
-    // Words or sounds mapped to their corresponding image file name (without .png)
     'A,E,I': 'A_E_I',
     'B,M,P': 'B_M_P',
     'C,D,N,S,T,X,Y,Z': 'C_D_N_S_T_X_Y_Z',

@@ -31,10 +31,10 @@ main h2 {
 }
 
 .recommended-part {
-    background-color: #ffffff; /* Slightly darker white */
+    background-color: rgb(214, 222, 224); /* Slightly darker white */
     padding: 2%;
     margin-bottom: 2%;
-    box-shadow: inset 0 0 10px #d6d8ca, inset 0 0 5px rgba(150, 150, 148, 0.7);
+    box-shadow: inset 0 0 10px #aaaca4, inset 0 0 5px rgba(94, 94, 93, 0.7);
     border-radius: 5px; /* Adjusted border-radius for the "C" shape */
     position: relative; /* Make sure this is a positioned element for the ::before pseudo-element */
     background-repeat: no-repeat;
@@ -133,7 +133,7 @@ li {
 
 .job-item {
     flex: 1;
-    background-color: #eef3f2;
+    background-color: #dee6e4;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -155,8 +155,8 @@ li {
     color: #4169e1;
 }
 
-.job-company, .job-program {
-    margin-top: 10px;
+.job-company, .job-program, .job-location {
+    margin-top: 5px;
     color: #777;
 }
 

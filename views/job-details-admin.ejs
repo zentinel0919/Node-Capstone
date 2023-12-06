@@ -48,24 +48,25 @@
       <div>
   <h3>Edit OJT Details</h3><br>
   <form id="edit-job-form" enctype="multipart/form-data" method="POST">
-    <label for="edit-title">Job Title</label>
-    <input type="text" id="edit-title" name="title" placeholder="Title" required>
+    <input type="text" hidden id="book-select" name="jobId" value="<%= job.id %>">
+    <label for="edit-title">Title</label>
+    <input type="text" id="edit-title" name="title" value="<%= job.title %>" placeholder="Title" required>
     <label for="edit-company">Company</label>
-    <input type="text" id="edit-company" name="company" placeholder="Company" required>
+    <input type="text" id="edit-company" name="company" value="<%= job.company %>" placeholder="Company" required>
     <label for="edit-program">Qualification</label>
-    <select class="form-control" name="program" id="program" required="">
+    <select class="form-control" name="program" value="<%= job.program %>" id="edit-program" required="">
       <option value="">Select Program</option>
-      <option value="Business & Management">Business & Management</option>
-      <option value="Creative Arts">Creative Arts</option>
-      <option value="Engineering & Mathematics">Engineering & Mathematics</option>
-      <option value="IT & Computer Science">IT & Computer Science</option>
-      <option value="Teacher & Education">Teacher & Education</option>
+      <option value="Business Education">Business Education</option>
+      <option value="Arts">Arts</option>
+      <option value="Engineering & Architecture">Engineering & Architecture</option>
+      <option value="Computer Studies">Computer Studies</option>
     </select><br />
     <label for="edit-location">Location Address</label>
-    <input type="text" class="form-control" name="location" id="location" placeholder="Address" required>
+    <input type="text" class="form-control" name="location" value="<%= job.location %>" id="edit-location" placeholder="Address" required>
     <br />
-    <label for="edit-description">New Description</label>
-    <textarea class="description-textarea" name="description" placeholder="Description" id="description" required rows="20" cols="80">
+    <label for="edit-description">New Description/Details</label>
+    <textarea class="description-textarea" name="description" value="<%= job.description %>" placeholder="Description" id="edit-description" required rows="20" cols="80">
+    <%= job.description %>
     </textarea><br>
     <button onclick="refreshPage()" type="submit" class="edit-book-btn">Save Changes</button>
   </form>
@@ -80,7 +81,7 @@
   <div class="job-content">
       <p class="job-program"><strong>Program:</strong> <%= job.program %></p>
       <p class="job-location"><strong>Location:</strong> <%= job.location %></p>
-      <p class="job-description"><strong>Description:</strong> <%= job.description %></p>
+      <p class="job-description" style="white-space: pre-line;"><strong>Description/Details:</strong> <%= job.description %></p>
   </div>
   <div class="job-actions">
       <button class="btn btn-success edit">Edit</button>
@@ -124,29 +125,25 @@ document.querySelector('.btn.edit').addEventListener('click', showModal);
 
 
   $('#edit-job-form').submit(function(event) {
-  event.preventDefault();
-  var formData = new FormData(this);
-  var jobId = window.location.pathname.split('/').pop(); // Assumes URL is like /jobs/{jobId}
+      event.preventDefault();
+      var formData = $(this).serialize();
+      var jobId = $('#book-select').val();
 
-  $.ajax({
-    type: 'POST',
-    url: '/admin/job/edit/' + jobId,
-    data: formData,
-    processData: false, // Important for FormData
-    contentType: false, // Important for FormData
-    success: function(response) {
-      // Handle success response
-      alert('Job updated successfully!');
-      console.log(response);
-      // Refresh the page or redirect
-    },
-    error: function(error) {
-      // Handle error response
-      alert('Failed to update job.');
-      console.log(error);
-    }
-  });
-});
+      // Make AJAX request to edit book
+      $.ajax({
+        type: 'POST',
+        url: '/admin/job/edit/' + jobId,
+        data: formData,
+        success: function(response) {
+          // Handle success response
+          console.log(response);
+        },
+        error: function(error) {
+          // Handle error response
+          console.log(error);
+        }
+      });
+    });
 
 
 // Delete Job Form Submission
