@@ -18,6 +18,44 @@ $(document).ready(function(){
         },
         isFirstItemUndeletable: true
     })
+
+    function updateLeftPreviewBackgroundColor(color) {
+        $('.preview-cnt-l').css('background-color', color);
+    }
+    
+    // Function to update background color for right preview area
+    function updateRightPreviewBackgroundColor(color) {
+        $('.preview-cnt-r').css('background-color', color);
+    }
+
+    $('#colorPaletteLeft').on('input', function () {
+        const color = $(this).val();
+        updateLeftPreviewBackgroundColor(color);
+    });
+    
+    $('#colorPaletteRight').on('input', function () {
+        const color = $(this).val();
+        updateRightPreviewBackgroundColor(color);
+    });
+
+    $('#fontColorLeft').on('input', function () {
+        $('.preview-cnt-l').css('color', $(this).val());
+    });
+
+    $('#fontColorRight').on('input', function () {
+        $('.preview-cnt-r').css('color', $(this).val());
+    });
+
+    $('#fontSizeControl').on('input', function () {
+        const newSize = $(this).val() + 'px';
+        $('.print_area').css('font-size', newSize);
+    });
+
+    $('#fontStyleSelect').on('change', function () {
+        const newFontStyle = $(this).val();
+        $('.print_area').css('font-family', newFontStyle);
+    });
+
 })
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -62,8 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Show the clicked section and add active class to the clicked link
     document.getElementById(sectionId).classList.remove('hidden');
-    document.getElementById(sectionId).classList.add('active');
+    document.getElementById(sectionId).classList.add('active'); 
     document.getElementById(sectionId + '-link').classList.add('active');
+
+    if (window.matchMedia && window.matchMedia("print").matches) {
+        // If it's print media, add print-specific classes
+        document.querySelector('.preview-cnt-l').classList.add('print-preview-cnt-l');
+        document.querySelector('.preview-cnt-r').classList.add('print-preview-cnt-r');
+    }
 }
 
 // Usage example: Update your onclick in HTML to pass the event object
@@ -71,6 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function coverLetterTemplate(name, phone, email, address, recipientName, companyAddress, position, message) {
+
+    const formattedMessage = `<div style="white-space: pre-line;">${message}</div>`;
     return `
 ${name.toUpperCase()}<br>
 ${position}<br>
@@ -90,7 +136,7 @@ JOB REFERENCE: SENIOR ACCOUNT MANAGER<br><br>
 
 Dear ${recipientName.split(" ")[0]},<br><br>
 
-${message}<br><br>
+${formattedMessage}<br><br>
 
 Sincerely,<br><br>
 

@@ -92,15 +92,70 @@
                     <input type="text" id="position" required><br><br>
                 
                     <label for="message">Message:</label><br>
-                    <textarea id="message" rows="4" required></textarea><br><br>
+                    <textarea id="message" rows="9" required></textarea><br><br>
                 
                 </form>
             
 
             </div>
         
+
             <div id="resume" class="content-section">
                 <h2>Resume Builder</h2>
+                <div id="toolbox-container">
+                    <div id="toolbox">
+                      <label for="colorPaletteLeft">Left Color Palette:</label>
+                      <input type="color" id="colorPaletteLeft">
+                
+                      <label for="colorPaletteRight">Right Color Palette:</label>
+                      <input type="color" id="colorPaletteRight">
+                
+                      <label for="fontColorLeft">Left Font Color:</label>
+                      <input type="color" id="fontColorLeft">
+                
+                      <label for="fontColorRight">Right Font Color:</label>
+                      <input type="color" id="fontColorRight">
+                
+                      <label for="fontSizeControl">Font Size:</label>
+                      <input type="range" id="fontSizeControl" min="10" max="30" step="1" value="16">
+                
+                      <label for="fontStyleSelect">Font Style:</label>
+                      <select id="fontStyleSelect">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Copperplate">Copperplate</option>
+                        <option value="Lucida Console">Lucida Console</option>
+                      </select>
+                      <button id="toggleToolbox">Toggle Toolbox</button>
+                    </div>
+                  </div>
+        
+                  <script>
+const toolbox = document.getElementById('toolbox');
+const toolboxButton = document.getElementById('toggleToolbox');
+
+toolboxButton.addEventListener('click', function () {
+  toolbox.classList.toggle('open');
+  updateButtonPosition();
+});
+
+// Update button position when the toolbox is open
+function updateButtonPosition() {
+  if (toolbox.classList.contains('open')) {
+    const toolboxWidth = toolbox.offsetWidth;
+    toolboxButton.style.right = `${toolboxWidth + 20}px`; // Adjust the distance based on the toolbox width
+  } else {
+    toolboxButton.style.right = '10px';
+  }
+}
+
+window.addEventListener('resize', updateButtonPosition);
+updateButtonPosition(); // Initialize position
+
+                  </script>
+
                 <div class = "cv-form-row-title-preview">
                     <h3>PREVIEW</h3>
                 </div>
@@ -151,6 +206,14 @@
                     </div>
 
                     <div class = "preview-cnt-r bg-white">
+
+                        <div class = "preview-blk">
+                            <div class = "preview-blk-title">
+                                <h3>Educational background</h3>
+                            </div>
+                            <div class = "educations-items preview-blk-list" id = "educations_dsp"></div>
+                        </div>
+
                         <div class = "preview-blk">
                             <div class = "preview-blk-title">
                                 <h3>Achievements</h3>
@@ -160,14 +223,7 @@
 
                         <div class = "preview-blk">
                             <div class = "preview-blk-title">
-                                <h3>educations</h3>
-                            </div>
-                            <div class = "educations-items preview-blk-list" id = "educations_dsp"></div>
-                        </div>
-
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>experiences</h3>
+                                <h3>Work experiences</h3>
                             </div>
                             <div class = "experiences-items preview-blk-list" id = "experiences_dsp"></div>
                         </div>
@@ -194,7 +250,7 @@
                     <form action="" class="cv-form" id = "cv-form">
                         <div class = "cv-form-blk">
                             <div class = "cv-form-row-title">
-                                <h3>about yourself</h3>
+                                <h3>PROFILE</h3>
                             </div>
                             <div class = "cv-form-row cv-form-row-about">
                                 <div class = "cols-3">
@@ -254,6 +310,59 @@
 
                         <div class="cv-form-blk">
                             <div class = "cv-form-row-title">
+                                <h3>EDUCATIONAL BACKGROUND</h3>
+                            </div>
+
+                            <div class = "row-separator repeater">
+                                <div class = "repeater" data-repeater-list = "group-c">
+                                    <div data-repeater-item>
+                                        <div class = "cv-form-row cv-form-row-experience">
+                                            <div class = "cols-3">
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">School</label>
+                                                    <input name = "edu_school" type = "text" class = "form-control edu_school" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">Degree</label>
+                                                    <input name = "edu_degree" type = "text" class = "form-control edu_degree" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">City</label>
+                                                    <input name = "edu_city" type = "text" class = "form-control edu_city" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class = "cols-3">
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">Start Date</label>
+                                                    <input name = "edu_start_date" type = "date" class = "form-control edu_start_date" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">End Date</label>
+                                                    <input name = "edu_graduation_date" type = "date" class = "form-control edu_graduation_date" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                                <div class = "form-elem">
+                                                    <label for = "" class = "form-label">Description</label>
+                                                    <input name = "edu_description" type = "text" class = "form-control edu_description" id = "" onkeyup="generateCV()">
+                                                    <span class="form-text"></span>
+                                                </div>
+                                            </div>
+
+                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="cv-form-blk">
+                            <div class = "cv-form-row-title">
                                 <h3>achievements</h3>
                             </div>
 
@@ -283,7 +392,7 @@
 
                         <div class="cv-form-blk">
                             <div class = "cv-form-row-title">
-                                <h3>experience</h3>
+                                <h3>Work experience</h3>
                             </div>
 
                             <div class = "row-separator repeater">
@@ -334,58 +443,6 @@
                             </div>
                         </div>
 
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>education</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-c">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-experience">
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">School</label>
-                                                    <input name = "edu_school" type = "text" class = "form-control edu_school" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Degree</label>
-                                                    <input name = "edu_degree" type = "text" class = "form-control edu_degree" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">City</label>
-                                                    <input name = "edu_city" type = "text" class = "form-control edu_city" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Start Date</label>
-                                                    <input name = "edu_start_date" type = "date" class = "form-control edu_start_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">End Date</label>
-                                                    <input name = "edu_graduation_date" type = "date" class = "form-control edu_graduation_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Description</label>
-                                                    <input name = "edu_description" type = "text" class = "form-control edu_description" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
 
                         <div class="cv-form-blk">
                             <div class = "cv-form-row-title">
