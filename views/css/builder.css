@@ -490,6 +490,7 @@ textarea{
 .preview-cnt-l{
     padding: 3rem 3rem 2rem 3rem;
 }
+
 .preview-cnt-r{
     padding: 3rem 3rem 3rem 4rem;
 }
@@ -776,6 +777,15 @@ textarea{
     border-radius: 10px;
 }
 
+#resume-link {
+    font-size: 200%;
+
+}
+
+#cover-letter-link{
+    font-size: 200%;
+}
+
 #resume-link:hover {
     transition: .5s;
     padding: 2%;
@@ -992,4 +1002,20 @@ textarea{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+  }
+
+  #colorPaletteLeft{
+    height: 7%;
+  }
+  
+  #colorPaletteRight{
+    height: 7%;
+  }
+
+  #fontColorLeft{
+    height: 7%
+  }
+
+  #fontColorRight{
+    height: 7%
   }
