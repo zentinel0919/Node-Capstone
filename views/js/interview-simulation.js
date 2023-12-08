@@ -353,7 +353,13 @@ window.onload = function() {
   
   function openModal() {
     document.getElementById('modal').style.display = 'block';
-}
+  
+    setTimeout(function () {
+      displayMessage('Bot', "Hello! To begin with the interview, tell me about yourself.");
+    }, 2000);
+  }
+  
+  
 
 function closeModal() {
     document.getElementById('modal').style.display = 'none';
