@@ -351,3 +351,13 @@ window.onload = function() {
     avatarImage.src = `/assets/animation/${expression}.png`;
   }
   
+  function openModal() {
+    document.getElementById('modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+// Open the modal when the page loads
+window.onload = openModal;
