@@ -269,15 +269,6 @@ document.getElementById('interview-form').addEventListener('submit', function(ev
   sendMessage();
 });
 
-// Start the interview when the page loads
-window.onload = function() {
-  setTimeout(function() {
-    // Display initial bot message
-    displayMessage('Bot', "Hello! To begin with the interview, tell me about yourself.");
-  }, 2000); // 2000 milliseconds (2 seconds) delay
-};
-
-
   function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.onboundary = function(event) {
@@ -351,9 +342,13 @@ window.onload = function() {
     avatarImage.src = `/assets/animation/${expression}.png`;
   }
   
+
   function openDisclaimerModal() {
     document.getElementById('disclaimer-modal-overlay').style.display = 'block';
     document.getElementById('disclaimer-modal').style.display = 'block';
+    setTimeout(function () {
+      displayMessage('Bot', "Hello! To begin with the interview, tell me about yourself.");
+    }, 2000);
   }
   
   function closeDisclaimerModal() {
