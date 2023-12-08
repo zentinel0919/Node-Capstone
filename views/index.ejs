@@ -253,7 +253,7 @@ function isNumberKey(evt) {
                 </div>
                 <div class="input-icon">
                   <i class="fas fa-user"></i>
-                <input type="tel" name="phone" id="phoneInput" placeholder="Phone Number" required="" class="form-control"><br />
+                  <input type="text" name="phone" id="phoneInput" placeholder="Phone Number" required="" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 10) this.value = this.value.slice(0, 10);" class="form-control"><br />
                 </div>
                 <div class="input-icon">
                   <i class="fas fa-venus-mars"></i>

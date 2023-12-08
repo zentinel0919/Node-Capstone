@@ -145,15 +145,15 @@
         </div>
         <div>
           <label for="phone">Phone:</label>
-          <input type="text" id="phone" name="phone" value="<%= user.phone %>" required>
+          <input type="text" name="phone" id="phoneInput" placeholder="Phone Number" required="" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 10) this.value = this.value.slice(0, 10);"><br />
         </div>
         <div>
           <label for="password">Current Password:</label>
-          <input type="password" id="password" name="password" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+          <input type="password" id="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character" required="">
         </div>
         <div>
           <label for="newPassword">New Password:</label>
-          <input type="password" id="newPassword" name="newPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
+          <input type="password" id="newPassword" name="newPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character" required="">
         </div>
         <div>
           <label for="confirmPassword">Confirm Password:</label>
