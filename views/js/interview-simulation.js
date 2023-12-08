@@ -351,19 +351,16 @@ window.onload = function() {
     avatarImage.src = `/assets/animation/${expression}.png`;
   }
   
-  function openModal() {
-    document.getElementById('modal').style.display = 'block';
-  
-    setTimeout(function () {
-      displayMessage('Bot', "Hello! To begin with the interview, tell me about yourself.");
-    }, 2000);
+  function openDisclaimerModal() {
+    document.getElementById('disclaimer-modal-overlay').style.display = 'block';
+    document.getElementById('disclaimer-modal').style.display = 'block';
   }
   
+  function closeDisclaimerModal() {
+    document.getElementById('disclaimer-modal-overlay').style.display = 'none';
+    document.getElementById('disclaimer-modal').style.display = 'none';
+  }
   
-
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-}
-
-// Open the modal when the page loads
-window.onload = openModal;
+  // Open the disclaimer modal when the page loads
+  window.onload = openDisclaimerModal;
+  

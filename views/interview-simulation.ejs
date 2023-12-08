@@ -38,20 +38,21 @@
     </nav>
 
 
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-overlay" id="disclaimer-modal-overlay"></div>
+    <div class="modal" id="disclaimer-modal">
+      <span class="modal-close" onclick="closeDisclaimerModal()">&times;</span>
+      <div class="modal-content">
         <h2>Disclaimer</h2>
-        <p>
-            Welcome to the T.I.P. Career Center's Interview Simulation! Please read and understand the following:
+        <p class="disclaimer-text">
+          1. The bot is a dialogue system, which is a more advanced interactive tool than a normal chatbot. It means that there will be no specific and fixed questions/responses from the bot, and it's flexible.
+          <br><br>
+          2. The set of questions/responses may be connected to how you introduce yourself. So, if possible, fully introduce yourself as much as you can.
+          <br><br>
+          3. There will be an evaluation of your responses at the end of the interview. You can also ask the bot for some tips about your career and interviews.
         </p>
-        <ol>
-            <li>The bot is a dialogue system, more advanced and interactive than a normal chatbot. There are no specific and fixed questions/responses, and it's flexible.</li>
-            <li>The set of questions/responses may be connected to how you introduce yourself. Fully introduce yourself for a more comprehensive experience.</li>
-            <li>There will be an evaluation of your responses at the end of the interview. You can also ask the bot for tips about your career and interview.</li>
-        </ol>
+      </div>
     </div>
-</div>
+    
 
 
     <div class="crop-container">
