@@ -448,13 +448,19 @@ button:hover {
   text-align: left;
 }
 
+.modal-content h2 {
+  margin-bottom: 1%;
+  border-bottom: 1px solid #505252;
+}
+
 /* Style the disclaimer text */
 .disclaimer-text {
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #333;
-  border-bottom: solid #505252;
+  margin-bottom: 1%;
+  border-bottom: 1px solid #505252;
 }
 
 /* Add styles for a nice transition effect */
