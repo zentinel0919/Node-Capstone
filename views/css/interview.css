@@ -449,6 +449,7 @@ button:hover {
 }
 
 .modal-content h2 {
+  padding-bottom: 1%;
   margin-bottom: 1%;
   border-bottom: 1px solid #505252;
 }
@@ -459,7 +460,7 @@ button:hover {
   font-size: 16px;
   line-height: 1.5;
   color: #333;
-  margin-bottom: 1%;
+  padding-bottom: 1%;
   border-bottom: 1px solid #505252;
 }
 
