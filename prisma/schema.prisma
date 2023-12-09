@@ -50,12 +50,12 @@ model Announcement {
 
 model DivBox {
   id          String     @id @default(uuid()) @map("_id")
-  image       String
+  image       String?
 }
 
 model DivBox2 {
   id          String     @id @default(uuid()) @map("_id")
-  image       String
+  image       String?
 }
 
 

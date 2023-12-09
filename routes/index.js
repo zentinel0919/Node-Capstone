@@ -41,8 +41,8 @@ const announcementStorage = multer.diskStorage({
   },
 });
 
-
 const announcementUpload = multer({ storage: announcementStorage });
+
 
 const divBoxStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -1078,9 +1078,13 @@ router.get('/directory', async function (req, res, next) {
           }
       });
       
+       const divBoxImages = await prisma.DivBox.findMany();
+       const divBox2Images = await prisma.DivBox2.findMany();
+
+    
         // Render the user dashboard
         var jobs = await prisma.job.findMany();
-        return res.render('user.ejs', { userId: userId, name: data.username, email: data.email, jobs, announcements });
+        return res.render('user.ejs', { userId: userId, name: data.username, email: data.email, jobs, announcements, divBoxImages, divBox2Images });
       }
     }
   }
