@@ -269,78 +269,44 @@ document.getElementById('interview-form').addEventListener('submit', function(ev
   sendMessage();
 });
 
-  function speak(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.onboundary = function(event) {
-      if (event.name === 'word') {
-        const word = text.slice(event.charIndex).split(' ')[0];
-        const expression = getExpressionForWord(word);
-        updateAvatar(expression);
-      }
-    };
-    speechSynthesis.speak(utterance); 
-  }
-  
-  function getExpressionForWord(word) {
-    // A very simple example of how you might determine the expression
-    const firstChar = word[0].toLowerCase();
-    const lastChar = word[word.length - 1].toLowerCase();
-    let expression = 'Normal'; // Default expression
-  
-    // Check the first character and map it to a mouth position
-    if ('aeir'.includes(firstChar)) {
-      expression = 'A,E,I'; // Use an image for open mouth vowels
-    } else if ('o'.includes(firstChar)) {
-      expression = 'O';
-    } else if ('u'.includes(firstChar)) {
-        expression = 'U';
-    } else if ('fv'.includes(firstChar)) {
-      expression = 'F,V'; // Use an image for closed mouth consonants
-    } else if ('bmp'.includes(firstChar)) {
-      expression = 'B,M,P'; // Use an image for closed mouth consonants
-    } else if ('cdnstxyz'.includes(firstChar)) {
-      expression = 'C,D,N,S,T,X,Y,Z'; // Use an image for closed mouth consonants
-    } else if ('gk'.includes(firstChar)) {
-      expression = 'G,K'; // Use an image for closed mouth consonants
-    } else if ('l'.includes(firstChar)) {
-      expression = 'L'; // Use an image for closed mouth consonants
-    } else if ('th'.includes(firstChar)) {
-      expression = 'TH'; // Use an image for closed mouth consonants
-    } else if ('ee'.includes(firstChar)) {
-      expression = 'EE'; // Use an image for closed mouth consonants
-    } else if ('wq'.includes(firstChar)) {
-      expression = 'W,Q'; // Use an image for closed mouth consonants
-    } 
+let lastExpression = null;
 
-    if ('aeiou'.includes(lastChar)) {
-      expression = 'A,E,I'; // Use an image for open mouth vowels
-    } else if ('o'.includes(lastChar)) {
-      expression = 'O';
-    } else if ('fv'.includes(lastChar)) {
-      expression = 'F,V'; // Use an image for closed mouth consonants
-    } else if ('bmp'.includes(lastChar)) {
-      expression = 'B,M,P'; // Use an image for closed mouth consonants
-    } else if ('cdnstxyz'.includes(lastChar)) {
-      expression = 'C,D,N,S,T,X,Y,Z'; // Use an image for closed mouth consonants
-    } else if ('gk'.includes(lastChar)) {
-      expression = 'G,K'; // Use an image for closed mouth consonants
-    } else if ('l'.includes(lastChar)) {
-      expression = 'L'; // Use an image for closed mouth consonants
-    } else if ('th'.includes(lastChar)) {
-      expression = 'TH'; // Use an image for closed mouth consonants
-    } else if ('ee'.includes(lastChar)) {
-      expression = 'EE'; // Use an image for closed mouth consonants
-    } else if ('wq'.includes(lastChar)) {
-      expression = 'W,Q'; // Use an image for closed mouth consonants
-    } 
-  
-    return expression;
-  }
-  
-  function updateAvatar(expression) {
-    const avatarImage = document.getElementById('avatar-image');
-    avatarImage.src = `/assets/animation/${expression}.png`;
-  }
+function speak(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.onboundary = function(event) {
+    if (event.name === 'word') {
+      const word = text.slice(event.charIndex).split(' ')[0];
+      const expression = getExpressionForWord(word);
+      updateAvatar(expression);
+    }
+  };
+  speechSynthesis.speak(utterance);
+}
+
+function getExpressionForWord(word) {
+  const expressions = [
+    'A,E,I', 'O', 'U',
+    'F,V', 'B,M,P', 'C,D,N,S,T,X,Y,Z',
+    'G,K', 'L', 'TH', 'EE', 'W,Q'
+  ];
+
+  // Filter out the last expression
+  const filteredExpressions = expressions.filter(exp => exp !== lastExpression);
+
+  // Randomly select an expression from the filtered list
+  const randomExpression = filteredExpressions[Math.floor(Math.random() * filteredExpressions.length)];
+
+  // Update the last expression
+  lastExpression = randomExpression;
+
+  return randomExpression;
+}
+
+function updateAvatar(expression) {
+  const avatarImage = document.getElementById('avatar-image');
+  avatarImage.src = `/assets/animation/${expression}.png`;
+}
+
   
 
   function openDisclaimerModal() {
