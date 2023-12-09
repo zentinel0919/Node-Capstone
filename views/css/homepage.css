@@ -293,11 +293,12 @@ main{
     background-color: #F7F7F7;
     padding-bottom: 4%;
     padding-top: 1%;
+    margin: 1%;
+
 }
 
 .upper-description {
     position: relative;
-    background: linear-gradient(to left, #F7F7F7 40%, rgb(205, 216, 143));
     padding: 1%;
     overflow: hidden;
   }
@@ -327,9 +328,11 @@ main{
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically if needed */
+    gap: 1%;
 }
 
-.button-container .prev-btn,
-.button-container .next-btn {
-    margin: 0 10px; /* Spacing between buttons */
+
+.button-container .nav-btn {
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 1px  rgb(85, 83, 83);
 }
