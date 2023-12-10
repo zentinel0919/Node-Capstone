@@ -51,7 +51,7 @@
       <section>
         <div class="recommended-part">
           <h2>Recommended Jobs 🕒</h2><br>
-          <div class="job-list">
+          <div class="job-list-recommended">
           <% recommendedJobs.forEach(function(job) { %>
             <div class="job-item">
               <div class="job-info">
@@ -94,12 +94,13 @@
   <div class="filter-panel">
     <h3>Filter by Program:</h3>
     <ul id="programList">
-      <li><a href="#" onclick="filterJobsByProgram('')">All Programs</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Business Education')">Business Education</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Arts')">Arts</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Engineering & Architecture')">Engineering & Architecture</a></li>
-      <li><a href="#" onclick="filterJobsByProgram('Computer Studies')">Computer Studies</a></li>
-    </ul>
+      <li><a href="#" onclick="filterJobsByProgram(event, '')">All Programs</a></li>
+      <li><a href="#" onclick="filterJobsByProgram(event, 'Business Education')">Business Education</a></li>
+      <li><a href="#" onclick="filterJobsByProgram(event, 'Arts')">Arts</a></li>
+      <li><a href="#" onclick="filterJobsByProgram(event, 'Engineering & Architecture')">Engineering & Architecture</a></li>
+      <li><a href="#" onclick="filterJobsByProgram(event, 'Computer Studies')">Computer Studies</a></li>
+  </ul>
+  
   </div>
   
 </div>
@@ -124,6 +125,24 @@
             }
           }
         }
+
+    function filterJobsByProgram(event, program) {
+        event.preventDefault(); // Prevent the default behavior of the anchor element
+
+        const jobItems = document.getElementsByClassName('job-item');
+
+        for (let i = 0; i < jobItems.length; i++) {
+            const programElement = jobItems[i].querySelector('.job-program').textContent.toLowerCase();
+
+            if (program === '' || programElement.includes(program.toLowerCase())) {
+                jobItems[i].style.display = 'flex';
+            } else {
+                jobItems[i].style.display = 'none';
+            }
+        }
+    }
+
+
 
 
 

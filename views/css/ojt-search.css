@@ -124,6 +124,15 @@ li {
     border-color: #5683ec;
 }
 
+.job-list-recommended {
+    display: grid;
+    grid-template-columns: 32.1% 32.1% 32.1%;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-height: 20rem;
+    overflow-y: auto;
+}
+
 .job-list {
     display: grid;
     grid-template-columns: 32.1% 32.1% 32.1%;
