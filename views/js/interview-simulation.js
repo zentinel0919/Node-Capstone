@@ -23,9 +23,7 @@ recognition.addEventListener('result', (e) => {
 
   // Clear the existing timeout and set a new one
   clearTimeout(recognitionTimeout);
-  recognitionTimeout = setTimeout(() => {
-    stopDictation();
-  }, 10000); // Adjust the delay time (in milliseconds) as needed
+  startRecognitionTimeout();
 });
 
 recognition.addEventListener('end', () => {
@@ -34,12 +32,19 @@ recognition.addEventListener('end', () => {
   }
 });
 
+function startRecognitionTimeout() {
+  recognitionTimeout = setTimeout(() => {
+    stopDictation();
+  }, 10000); // Adjust the delay time (in milliseconds) as needed
+}
+
 function startDictation() {
   if (!isListening) {
     recognition.start();
     isListening = true;
     // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
+    startRecognitionTimeout(); // Start the timeout when dictation starts
   } else {
     stopDictation();
   }
@@ -50,12 +55,15 @@ function stopDictation() {
   isListening = false;
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
+  // Clear the timeout when dictation stops
+  clearTimeout(recognitionTimeout);
 }
 
 // Clear the timeout when the page is unloaded
 window.addEventListener('unload', () => {
   clearTimeout(recognitionTimeout);
 });
+
 
 
 
