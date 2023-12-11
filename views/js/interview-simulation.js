@@ -1,6 +1,5 @@
 let recognition;
 let isListening = false;
-let recognitionTimeout;
 
 // Check if the browser supports the Web Speech API
 if ('webkitSpeechRecognition' in window) {
@@ -12,7 +11,8 @@ if ('webkitSpeechRecognition' in window) {
 }
 
 recognition.interimResults = false;  // Set to false for more accurate results after a pause
-recognition.continuous = true;
+recognition.continuous = true;  // Enable continuous recognition
+
 
 recognition.addEventListener('result', (e) => {
   const transcript = Array.from(e.results)
@@ -21,10 +21,6 @@ recognition.addEventListener('result', (e) => {
 
   const userMessageInput = document.getElementById('user-prompt');
   userMessageInput.value = transcript.join(' ');
-
-  // Clear the existing timeout and set a new one
-  clearTimeout(recognitionTimeout);
-  startRecognitionTimeout();
 });
 
 recognition.addEventListener('end', () => {
@@ -33,19 +29,14 @@ recognition.addEventListener('end', () => {
   }
 });
 
-function startRecognitionTimeout() {
-  recognitionTimeout = setTimeout(() => {
-    stopDictation();
-  }, 10000); // Adjust the delay time (in milliseconds) as needed
-}
-
 function startDictation() {
   if (!isListening) {
     recognition.start();
     isListening = true;
+    // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
-    startRecognitionTimeout(); // Start the timeout when dictation starts
   } else {
+    stopDictation();
   }
 }
 
@@ -54,16 +45,7 @@ function stopDictation() {
   isListening = false;
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
-  // Clear the timeout when dictation stops
-  clearTimeout(recognitionTimeout);
 }
-
-// Clear the timeout when the page is unloaded
-window.addEventListener('unload', () => {
-  clearTimeout(recognitionTimeout);
-});
-
-
 
 
 // interview-simulation.js
