@@ -10,23 +10,22 @@ if ('webkitSpeechRecognition' in window) {
   alert('Your browser does not support speech recognition. Please try a different browser.');
 }
 
-recognition.continuous = false;  // Enable continuous recognition
-recognition.interimResults = true;  // Enable interim results
-recognition.lang = "en-US";
+recognition.interimResults = true;
 
-recognition.onresult = function(e) {
+recognition.addEventListener('result', (e) => {
+  const transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript);
+
   const userMessageInput = document.getElementById('user-prompt');
-  let fullTranscript = "";
-  for (let i = 0; i < e.results.length; i++) {
-    fullTranscript += e.results[i][0].transcript;
-  }
-  
-  userMessageInput.value = fullTranscript;
-};
+  userMessageInput.value = transcript.join(' ');
+});
 
-recognition.onerror = function(e) {
-  stopDictation();
-};
+recognition.addEventListener('end', () => {
+  if (isListening) {
+    recognition.start();
+  }
+});
 
 function startDictation() {
   if (!isListening) {
@@ -34,7 +33,6 @@ function startDictation() {
     isListening = true;
     // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
-
   } else {
     stopDictation();
   }
@@ -46,6 +44,7 @@ function stopDictation() {
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
 }
+
 
 // interview-simulation.js
 
