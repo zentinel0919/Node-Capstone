@@ -1,5 +1,6 @@
 let recognition;
 let isListening = false;
+let timeoutId;
 
 // Check if the browser supports the Web Speech API
 if ('webkitSpeechRecognition' in window) {
@@ -10,24 +11,27 @@ if ('webkitSpeechRecognition' in window) {
   alert('Your browser does not support speech recognition. Please try a different browser.');
 }
 
-recognition.interimResults = false;  // Set to false for more accurate results after a pause
 recognition.continuous = true;  // Enable continuous recognition
+recognition.interimResults = true;  // Enable interim results
+recognition.lang = "en-US";
 
-
-recognition.addEventListener('result', (e) => {
-  const transcript = Array.from(e.results)
-    .map(result => result[0])
-    .map(result => result.transcript);
-
+recognition.onresult = function(e) {
   const userMessageInput = document.getElementById('user-prompt');
-  userMessageInput.value = transcript.join(' ');
-});
+  const latestResult = e.results[e.results.length - 1][0].transcript;
+  userMessageInput.value = latestResult;
 
-recognition.addEventListener('end', () => {
-  if (isListening) {
-    recognition.start();
-  }
-});
+  // Clear the existing timeout
+  clearTimeout(timeoutId);
+
+  // Set a new timeout to stop recognition after a pause (e.g., 2 seconds)
+  timeoutId = setTimeout(() => {
+    stopDictation();
+  }, 8000);
+};
+
+recognition.onerror = function(e) {
+  stopDictation();
+};
 
 function startDictation() {
   if (!isListening) {
@@ -46,6 +50,7 @@ function stopDictation() {
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
 }
+
 
 
 // interview-simulation.js
