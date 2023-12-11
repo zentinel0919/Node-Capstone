@@ -1,5 +1,6 @@
 let recognition;
 let isListening = false;
+let fullTranscript = "";
 
 // Check if the browser supports the Web Speech API
 if ('webkitSpeechRecognition' in window) {
@@ -11,15 +12,16 @@ if ('webkitSpeechRecognition' in window) {
 }
 
 recognition.interimResults = true;
-recognition.continuous = true;
 
 recognition.addEventListener('result', (e) => {
   const transcript = Array.from(e.results)
     .map(result => result[0])
     .map(result => result.transcript);
 
+  fullTranscript += transcript.join(' ');
+  
   const userMessageInput = document.getElementById('user-prompt');
-  userMessageInput.value = transcript.join(' ');
+  userMessageInput.value = fullTranscript.trim();
 });
 
 recognition.addEventListener('end', () => {
@@ -45,6 +47,7 @@ function stopDictation() {
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
 }
+
 
 
 // interview-simulation.js
