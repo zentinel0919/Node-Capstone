@@ -9,7 +9,8 @@ if ('webkitSpeechRecognition' in window) {
   alert('Your browser does not support speech recognition. Please try a different browser.');
 }
 
-recognition.interimResults = true;
+recognition.interimResults = false;  // Set to false for more accurate results after a pause
+recognition.continuous = true;
 
 recognition.addEventListener('result', (e) => {
   const transcript = Array.from(e.results)
