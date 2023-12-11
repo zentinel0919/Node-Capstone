@@ -42,11 +42,9 @@ function startDictation() {
   if (!isListening) {
     recognition.start();
     isListening = true;
-    // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
     startRecognitionTimeout(); // Start the timeout when dictation starts
   } else {
-    stopDictation();
   }
 }
 
