@@ -1,4 +1,6 @@
 let recognition;
+let isListening = false;
+let recognitionTimeout;
 
 // Check if the browser supports the Web Speech API
 if ('webkitSpeechRecognition' in window) {
@@ -10,7 +12,7 @@ if ('webkitSpeechRecognition' in window) {
 }
 
 recognition.interimResults = false;  // Set to false for more accurate results after a pause
-recognition.continuous = true;  // Enable continuous recognition
+recognition.continuous = true;
 
 recognition.addEventListener('result', (e) => {
   const transcript = Array.from(e.results)
@@ -19,24 +21,47 @@ recognition.addEventListener('result', (e) => {
 
   const userMessageInput = document.getElementById('user-prompt');
   userMessageInput.value = transcript.join(' ');
+
+  // Clear the existing timeout and set a new one
+  clearTimeout(recognitionTimeout);
+  startRecognitionTimeout();
 });
 
+recognition.addEventListener('end', () => {
+  if (isListening) {
+    recognition.start();
+  }
+});
+
+function startRecognitionTimeout() {
+  recognitionTimeout = setTimeout(() => {
+    stopDictation();
+  }, 10000); // Adjust the delay time (in milliseconds) as needed
+}
+
 function startDictation() {
-  recognition.start();
-  // Change the button color to indicate it's listening
-  document.getElementById('micButton').style.backgroundColor = "red";
+  if (!isListening) {
+    recognition.start();
+    isListening = true;
+    document.getElementById('micButton').style.backgroundColor = "red";
+    startRecognitionTimeout(); // Start the timeout when dictation starts
+  } else {
+  }
 }
 
 function stopDictation() {
   recognition.stop();
+  isListening = false;
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
+  // Clear the timeout when dictation stops
+  clearTimeout(recognitionTimeout);
 }
 
-// Attach event listeners to the buttons
-document.getElementById('micButton').addEventListener('click', startDictation);
-document.getElementById('stopButton').addEventListener('click', stopDictation);
-
+// Clear the timeout when the page is unloaded
+window.addEventListener('unload', () => {
+  clearTimeout(recognitionTimeout);
+});
 
 
 
