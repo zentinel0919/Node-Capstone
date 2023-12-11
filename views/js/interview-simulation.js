@@ -1,6 +1,6 @@
 let recognition;
 let isListening = false;
-let fullTranscript = "";
+let recognitionTimeout;
 
 // Check if the browser supports the Web Speech API
 if ('webkitSpeechRecognition' in window) {
@@ -18,10 +18,14 @@ recognition.addEventListener('result', (e) => {
     .map(result => result[0])
     .map(result => result.transcript);
 
-  fullTranscript += transcript.join(' ');
-  
   const userMessageInput = document.getElementById('user-prompt');
-  userMessageInput.value = fullTranscript.trim();
+  userMessageInput.value = transcript.join(' ');
+
+  // Clear the existing timeout and set a new one
+  clearTimeout(recognitionTimeout);
+  recognitionTimeout = setTimeout(() => {
+    stopDictation();
+  }, 10000); // Adjust the delay time (in milliseconds) as needed
 });
 
 recognition.addEventListener('end', () => {
@@ -47,6 +51,11 @@ function stopDictation() {
   // Reset the button color
   document.getElementById('micButton').style.backgroundColor = "";
 }
+
+// Clear the timeout when the page is unloaded
+window.addEventListener('unload', () => {
+  clearTimeout(recognitionTimeout);
+});
 
 
 
