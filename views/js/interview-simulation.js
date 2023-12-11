@@ -10,7 +10,7 @@ if ('webkitSpeechRecognition' in window) {
   alert('Your browser does not support speech recognition. Please try a different browser.');
 }
 
-recognition.continuous = true;  // Enable continuous recognition
+recognition.continuous = false;  // Enable continuous recognition
 recognition.interimResults = true;  // Enable interim results
 recognition.lang = "en-US";
 
