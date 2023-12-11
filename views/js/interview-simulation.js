@@ -11,6 +11,7 @@ if ('webkitSpeechRecognition' in window) {
 }
 
 recognition.interimResults = true;
+recognition.continuous = true;
 
 recognition.addEventListener('result', (e) => {
   const transcript = Array.from(e.results)
