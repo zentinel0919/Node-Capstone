@@ -9,68 +9,44 @@
 </head>
 <body>
 
-  <% if (user.isAdmin) { %>
-    <nav>
-      <ul class="nav">
-        <li class="nav-logo">
-          <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-      </li>
-      <div class="nav-items">
-          <li><div class="dropdown"><a class="navtext" href="/directory">
-            DASHBOARD
-            </a>
-            <div class="dropdown-content">
-          <a href="/admin/homepage">Hompage Components</a>
-            </div>
-          </div>
-          </li>
-          <li><div class="dropdown"><a class="navtext" href="#">
-            SERVICES
-            </a>
-            <div class="dropdown-content">
-              <a href="/counseling">Counseling</a>
-              <a href="/admin/job">Manage OJT</a>
-            </div>
-          </div>
-          </li>
-          <li><a class="navtext" href="/user/profile">Profile</a></li>
-          <li><a class="navtext" href="/logout">Logout</a></li>
-          </div>
-      </ul>
-  </nav>
-  <% } else { %>
-    <nav>
-      <ul class="nav">
-        <li class="nav-logo">
-          <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-      </li>
-      <div class="nav-items">
-          <li><div class="dropdown"><a class="navtext" href="/directory">
-            HOME
-            </a>
-            <div class="dropdown-content">
-          <a href="#About-Us">About Us</a>
-          <a href="#Contact-Us">Contact Us</a>
-            </div>
-          </div>
-          </li>
-          <li><div class="dropdown"><a class="navtext" href="#">
-            SERVICES
-            </a>
-            <div class="dropdown-content">
-              <a href="/counseling">Counseling</a>
-              <a href="/ojt-search">OJT Search</a>
-              <a href="/interview">Interview Simulation</a>
-              <a href="/builder">Builder</a>
-            </div>
-          </div>
-          </li>
-          <li><a class="navtext" href="/user/profile">Profile</a></li>
-          <li><a class="navtext" href="/logout">Logout</a></li>
-          </div>
-      </ul>
-  </nav>
-  <% } %>
+  <header class="header">
+    <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+
+     <nav class="main-nav">
+         
+
+         <ul class="nav-items">
+        
+             <li><div class="dropdown"><a class="navtext" href="/directory">
+           HOME
+         </a>
+         <div class="dropdown-content">
+             <a href="#About-Us">About Us</a>
+             <a href="#Contact-Us">Contact Us</a>
+         </div>
+     </div>
+ </li>
+ <li><div class="dropdown"><a class="navtext" href="#">
+     SERVICES
+ </a>
+ <div class="dropdown-content">
+             <a href="/counseling">Counseling</a>
+             <a href="/ojt-search">OJT Search</a>
+             <a href="/interview">Interview Simulation</a>
+             <a href="/builder">Builder</a>
+         </div>
+     </div>
+ </li>
+ <li><a class="navtext" href="/user/profile">Profile</a></li>
+ <li><a class="navtext" href="/logout">Logout</a></li>
+</ul>
+
+ </nav>
+ <button class="btn-mobile-nav">
+     <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+     <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+ </button>
+</header>
 
 <main>
   <section class="profile-section">
@@ -145,15 +121,15 @@
         </div>
         <div>
           <label for="phone">Phone:</label>
-          <input type="text" name="phone" id="phoneInput" placeholder="Phone Number" required="" oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 11) this.value = this.value.slice(0, 11);"><br />
+          <input type="text" id="phone" name="phone" value="<%= user.phone %>" required>
         </div>
         <div>
           <label for="password">Current Password:</label>
-          <input type="password" id="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character" required="">
+          <input type="password" id="password" name="password" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
         </div>
         <div>
           <label for="newPassword">New Password:</label>
-          <input type="password" id="newPassword" name="newPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character" required="">
+          <input type="password" id="newPassword" name="newPassword" pattern=".{8,}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters long and contain at least one letter, one number, and one special character" required>
         </div>
         <div>
           <label for="confirmPassword">Confirm Password:</label>
@@ -201,34 +177,42 @@ removeFavoriteButtons.forEach(button => {
 
 
 
-      // Show modal when "Edit Profile" button is clicked
-      const editProfileBtn = document.getElementById('editProfileBtn');
-    const editProfileModal = document.getElementById('editProfileModal');
-    const closeModal = document.getElementById('closeModal');
+      // ...
 
-    editProfileBtn.addEventListener('click', () => {
-      editProfileModal.style.display = 'block';
-    });
+// Show modal when "Edit Profile" button is clicked
+const editProfileBtn = document.getElementById('editProfileBtn');
+const editProfileModal = document.getElementById('editProfileModal');
+const closeEditProfileModalButton = document.querySelector('.modal-close'); // Changed to .modal-close
 
-    closeModal.addEventListener('click', () => {
-      editProfileModal.style.display = 'none';
-    });
+editProfileBtn.addEventListener('click', () => {
+  editProfileModal.style.display = 'block';
+});
 
-    // Close modal when clicking outside the modal content
-    window.addEventListener('click', (event) => {
-      if (event.target === editProfileModal) {
-        editProfileModal.style.display = 'none';
-      }
-    });
+closeEditProfileModalButton.addEventListener('click', () => { // Changed to closeEditProfileModalButton
+  editProfileModal.style.display = 'none';
+});
 
-    function openEditProfileModal() {
-      document.getElementById('editProfileModal').style.display = 'block';
-    }
+// Close modal when clicking outside the modal content
+window.addEventListener('click', (event) => {
+  if (event.target === editProfileModal) {
+    editProfileModal.style.display = 'none';
+  }
+});
 
-    function closeEditProfileModal() {
-      document.getElementById('editProfileModal').style.display = 'none';
-    }
+const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".header");
+const mainNavEl = document.querySelector(".main-nav"); // Added this line
+
+btnNavEl.addEventListener('click', function () {
+  headerEl.classList.toggle("nav-open");
+  mainNavEl.classList.toggle("nav-open"); // Added this line
+});
+
+// ...
+
 
 </script>
 </body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>

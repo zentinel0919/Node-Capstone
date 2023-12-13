@@ -8,48 +8,57 @@
 </head>
 <body>
 
-  <nav>
-    <ul class="nav">
-        <li class="nav-logo">
-            <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-        </li>
-        <div class="nav-items">
-        <li><div class="dropdown"><a class="navtext" href="/directory">
-          HOME
-          </a>
-          <div class="dropdown-content">
-            <a href="/directory#About-Us">About Us</a>
-            <a href="/directory#Contact-Us">Contact Us</a>
-          </div>
-        </div>
-        </li>
-        <li><div class="dropdown"><a class="navtext" href="#">
-          SERVICES
-          </a>
-          <div class="dropdown-content">
-            <a href="/counseling">Counseling</a>
-            <a href="/ojt-search">OJT Search</a>
-            <a href="/interview">Interview Simulation</a>
-            <a href="/builder">Builder</a>
-          </div>
-        </div>
-        </li>
-        <li><a class="navtext" href="/user/profile">Profile</a></li>
-        <li><a class="navtext" href="/logout">Logout</a></li>
-        </div>
-    </ul>
-</nav>
-
+    <header class="header">
+        <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+ 
+         <nav class="main-nav">
+             
+ 
+             <ul class="nav-items">
+            
+                 <li><div class="dropdown"><a class="navtext" href="/directory">
+               HOME
+             </a>
+             <div class="dropdown-content">
+                 <a href="#About-Us">About Us</a>
+                 <a href="#Contact-Us">Contact Us</a>
+             </div>
+         </div>
+     </li>
+     <li><div class="dropdown"><a class="navtext" href="#">
+         SERVICES
+     </a>
+     <div class="dropdown-content">
+                 <a href="/counseling">Counseling</a>
+                 <a href="/ojt-search">OJT Search</a>
+                 <a href="/interview">Interview Simulation</a>
+                 <a href="/builder">Builder</a>
+             </div>
+         </div>
+     </li>
+     <li><a class="navtext" href="/user/profile">Profile</a></li>
+     <li><a class="navtext" href="/logout">Logout</a></li>
+ </ul>
+ 
+     </nav>
+     <button class="btn-mobile-nav">
+         <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+         <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+     </button>
+ </header>
 
 <div class="upper-description">
-    <img src="/assets/upper-description.png" alt="Description Background" class="description-bg-image">
-    <div class="description-content">
-    <h2>Counseling</h2>
-    <span>Welcome to the Counseling Scheduler, an intuitive online platform designed to streamline the appointment setting process for students seeking career guidance.
-         Our scheduler is tailored to the unique needs of the Technological Institute of the Philippines community,
-        offering a user-friendly interface that makes booking a session with our experienced career counselors both quick and convenient.</span>
+    <div class="grids">
+        <div class="desc-main" style="padding: 2rem;">
+        <h2>Counseling</h2>
+        <span>Welcome to the Counseling Scheduler, an intuitive online platform designed to streamline the appointment setting process for students seeking career guidance.
+            Our scheduler is tailored to the unique needs of the Technological Institute of the Philippines community,
+            offering a user-friendly interface that makes booking a session with our experienced career counselors both quick and convenient.</span>
+        </div>
+        <img src="/assets/upper-description.png" alt="Description Background" class="description-bg-image">
+
     </div>
-    </div>
+</div>
 <div class="container">
     <div class="first-part">
     <h2>Available Dates</h2>
@@ -165,6 +174,36 @@ document.getElementById('searchFilterBtn').addEventListener('click', function() 
         }
     });
 });
+
+// here
+
+const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".header");
+
+btnNavEl.addEventListener('click', function () {
+    headerEl.classList.toggle("nav-open");
+})
+
+// stick
+
+const sectionUpperEl = document.querySelector(".container");
+
+const obs = new IntersectionObserver(
+function (entries) {
+const ent = entries[0];
+console.log(ent);
+
+if (ent.isIntersecting === false)
+document.body.classList.add('sticky');
+else
+document.body.classList.remove('sticky');
+},
+{
+root: null,
+threshold: 0,
+}
+);
+obs.observe(sectionUpperEl);
 </script>
 
 
@@ -173,5 +212,8 @@ document.getElementById('searchFilterBtn').addEventListener('click', function() 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/js/pikaday.min.js"></script>
 <script src="/js/counseling.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </html>

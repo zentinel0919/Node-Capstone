@@ -3,49 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="/css/ojt-search.css">
   <title>OJT Search</title>
 </head>
 <body>
-  <nav>
-    <ul class="nav">
-      <li class="nav-logo">
-        <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-    </li>
-    <div class="nav-items">
-        <li><div class="dropdown"><a class="navtext" href="/directory">
-          HOME
-          </a>
-          <div class="dropdown-content">
-            <a href="/directory#About-Us">About Us</a>
-            <a href="/directory#Contact-Us">Contact Us</a>
-          </div>
-        </div>
-        </li>
-        <li><div class="dropdown"><a class="navtext" href="#">
-          SERVICES
-          </a>
-          <div class="dropdown-content">
-            <a href="/counseling">Counseling</a>
-            <a href="/ojt-search">OJT Search</a>
-            <a href="/interview">Interview Simulation</a>
-            <a href="/builder">Builder</a>
-          </div>
-        </div>
-        </li>
-        <li><a class="navtext" href="/user/profile">Profile</a></li>
-        <li><a class="navtext" href="/logout">Logout</a></li>
-        </div>
-    </ul>
-</nav>
+  <header class="header sticky">
+    <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+
+     <nav class="main-nav">
+         
+
+         <ul class="nav-items">
+        
+             <li><div class="dropdown"><a class="navtext" href="/directory">
+           HOME
+         </a>
+         <div class="dropdown-content">
+             <a href="#About-Us">About Us</a>
+             <a href="#Contact-Us">Contact Us</a>
+         </div>
+     </div>
+ </li>
+ <li><div class="dropdown"><a class="navtext" href="#">
+     SERVICES
+ </a>
+ <div class="dropdown-content">
+             <a href="/counseling">Counseling</a>
+             <a href="/ojt-search">OJT Search</a>
+             <a href="/interview">Interview Simulation</a>
+             <a href="/builder">Builder</a>
+         </div>
+     </div>
+ </li>
+ <li><a class="navtext" href="/user/profile">Profile</a></li>
+ <li><a class="navtext" href="/logout">Logout</a></li>
+</ul>
+
+ </nav>
+ <button class="btn-mobile-nav">
+     <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+     <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+ </button>
+</header>
 <div class="upper-description">
-  <img src="/assets/ojt-design.png" alt="Description Background" class="description-bg-image">
-  <div class="description-content">
-  <h2>OJT Search</h2>
-  <span>Embark on the journey to real-world expertise with our OJT Search platform,
-     a dedicated feature of the Technological Institute of the Philippines Career Center designed to connect our students with meaningful on-the-job training opportunities.
-      Our comprehensive search tool is engineered to match your academic pursuits with the practical experience you need to excel in today's competitive job market.</span>
-  </div>
+  <div class="grids">
+    <div class="description-content">
+      <h2>OJT Search</h2>
+      <span>Embark on the journey to real-world expertise with our OJT Search platform,
+        a dedicated feature of the Technological Institute of the Philippines Career Center designed to connect our students with meaningful on-the-job training opportunities.
+        Our comprehensive search tool is engineered to match your academic pursuits with the practical experience you need to excel in today's competitive job market.</span>
+      </div>
+      <img src="/assets/ojt-design.png" alt="Description Background" class="description-bg-image">
+
+    </div>
   </div>
     <main>
       <section>
@@ -60,7 +71,6 @@
                 </p>
                 <p class="job-company">Company: <%= job.company %></p>
                 <p class="job-program">Program: <%= job.program %></p>
-                <p class="job-location">Location: <%= job.location %></p>
                 <button class="favorite-button" onclick="addToFavorite('<%= job.id %>')">
                   <i class="favorite-icon">Save to Favorite</i>
                 </button>
@@ -72,7 +82,7 @@
         
   
   <h2>Job List</h2><br>
-  <input type="text" id="searchInput" placeholder="Search by company, title, program, or location" onkeyup="filterJobs()">
+  <input type="text" id="searchInput" placeholder="Search by company or job title" onkeyup="filterJobs()">
   <div class="recommendation">
   <div class="job-list">
     <% jobs.forEach(function(job) { %>
@@ -81,9 +91,8 @@
           <p class="job-title">
             <a class="job-title-link" href="/jobs/<%= job.id %>"><%= job.title %></a>
             </p>
-            <p class="job-company">Company: <%= job.company %></p>
-            <p class="job-program">Program: <%= job.program %></p>
-            <p class="job-location">Location: <%= job.location %></p>
+          <p class="job-company">Company: <%= job.company %></p>
+          <p class="job-program">Program: <%= job.program %></p>
           <button class="favorite-button"  onclick="addToFavorite('<%= job.id %>')">
             <i class="favorite-icon">Save to Favorite</i>
         </div>
@@ -99,8 +108,7 @@
       <li><a href="#" onclick="filterJobsByProgram(event, 'Arts')">Arts</a></li>
       <li><a href="#" onclick="filterJobsByProgram(event, 'Engineering & Architecture')">Engineering & Architecture</a></li>
       <li><a href="#" onclick="filterJobsByProgram(event, 'Computer Studies')">Computer Studies</a></li>
-  </ul>
-  
+    </ul>
   </div>
   
 </div>
@@ -144,8 +152,6 @@
 
 
 
-
-
     function addToFavorite(jobId) {
 
       fetch('/user/profile', {
@@ -165,8 +171,21 @@
           // Handle the error and display an error message if necessary 
         });
     }
+
+    // here
+
+const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".header");
+
+btnNavEl.addEventListener('click', function () {
+    headerEl.classList.toggle("nav-open");
+})
+
   </script>
     </section>
   </main>
 </body>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </html>

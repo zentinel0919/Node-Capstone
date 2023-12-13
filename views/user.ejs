@@ -7,48 +7,49 @@
     <title>Home</title>
 </head>
 
-<style>
-    .nav {
-        margin-bottom: 3%;
-    }
-</style>
-
 <body>
-    <nav>
-        <ul class="nav">
-            <li class="nav-logo">
-                <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-            </li>
-            <div class="nav-items">
-            <li><div class="dropdown"><a class="navtext" href="/directory">
+    <header class="header">
+       <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+
+        <nav class="main-nav">
+            
+
+            <ul class="nav-items">
+           
+                <li><div class="dropdown"><a class="navtext" href="/directory">
               HOME
-              </a>
-              <div class="dropdown-content">
-            <a href="#About-Us">About Us</a>
-            <a href="#Contact-Us">Contact Us</a>
-              </div>
+            </a>
+            <div class="dropdown-content">
+                <a href="#About-Us">About Us</a>
+                <a href="#Contact-Us">Contact Us</a>
             </div>
-            </li>
-            <li><div class="dropdown"><a class="navtext" href="#">
-              SERVICES
-              </a>
-              <div class="dropdown-content">
+        </div>
+    </li>
+    <li><div class="dropdown"><a class="navtext" href="#">
+        SERVICES
+    </a>
+    <div class="dropdown-content">
                 <a href="/counseling">Counseling</a>
                 <a href="/ojt-search">OJT Search</a>
                 <a href="/interview">Interview Simulation</a>
                 <a href="/builder">Builder</a>
-              </div>
             </div>
-            </li>
-            <li><a class="navtext" href="/user/profile">Profile</a></li>
-            <li><a class="navtext" href="/logout">Logout</a></li>
         </div>
-        </ul>
+    </li>
+    <li><a class="navtext" href="/user/profile">Profile</a></li>
+    <li><a class="navtext" href="/logout">Logout</a></li>
+</ul>
+
     </nav>
+    <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+    </button>
+</header>
     <body>
          <div class="upper-homepage">
-        <div class="hello-homepage">
-            <div class="logo-img"><img src="/assets/careercenter3.png" alt=""></div>
+             <div class="hello-homepage">
+                 <div class="logo-img"><img src="/assets/careercenter3.png" alt=""></div>
             <div class="hello-text">The T.I.P. Career Center aims to bring you closer to the career of your dreams. 
             The center provides the resources needed for your career development.
             It also links you to T.I.P.'s leading industry partners for internship, job placement, and other opportunities. 
@@ -67,9 +68,9 @@
                         <!-- Sample Announcement -->
                         <div class="announcement">
                             <p><% announcements.forEach(announcement => { %>
-                                <div class="announcement" id="announcement2">
+                                <div class="announcement">
                                     <h3><%= announcement.title %></h3>
-                                    <p style="white-space: pre-line;"><%= announcement.content %></p>
+                                    <p><%= announcement.content %></p>
                                     <img src="<%= announcement.image %>" alt="Announcement Image">
                                     <p>Date: <%= announcement.date %></p>
                                 </div>
@@ -81,13 +82,13 @@
                         <div class="div-title">
                          QUOTE OF THE DAY
                         </div>
-                        <img src="<%= divBoxImages[0].image %>" alt="DivBox Image">
+                        <img src="/assets/divbox1.jpg" alt="/assets/divbox1.jpg">
                     </div>
                     <div class="div-box2">
                         <div class="div-title">
                             OTHERS
                            </div>
-                           <img src="<%= divBox2Images[0].image %>" alt="DivBox 2 Image">
+                        <img src="/assets/divbox2.jpg" alt="/assets/divbox2.jpg">
                     </div>
                 </div>
             </div>
@@ -107,7 +108,7 @@
             Welcome T.I.Pians!
         </div>
         <div class="about-1st-paragraph">
-            At Your Career Resource Center, we are dedicated to empowering individuals in their professional journey. We have been committed to providing invaluable support to individuals as they navigate the ever-evolving landscape of careers and employment. Our journey began with a passion for helping individuals achieve their career aspirations. Over the years, we have evolved and grown, but our dedication to guiding you toward career success remains unwavering.
+            At Your Career Resource Center, we are dedicated to empowering individuals in their professional journey. Founded in [year of foundation], we have been committed to providing invaluable support to individuals as they navigate the ever-evolving landscape of careers and employment. Our journey began with a passion for helping individuals achieve their career aspirations. Over the years, we have evolved and grown, but our dedication to guiding you toward career success remains unwavering.
         </div>
     </div>
     <div class="about-2nd-section">
@@ -259,6 +260,40 @@
     
         changeImage();
         setInterval(changeImage, 2000); // Change image every 3 seconds
+
+        // here
+
+        const btnNavEl = document.querySelector(".btn-mobile-nav");
+        const headerEl = document.querySelector(".header");
+
+        btnNavEl.addEventListener('click', function () {
+            headerEl.classList.toggle("nav-open");
+        })
+
+        // stick
+
+ const sectionUpperEl = document.querySelector(".hello-homepage");
+
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    console.log(ent);
+
+    if (ent.isIntersecting === false)
+      document.body.classList.add('sticky');
+    else
+      document.body.classList.remove('sticky');
+  },
+  {
+    root: null,
+    threshold: 0,
+  }
+);
+obs.observe(sectionUpperEl);
+
     </script>
-    
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         </html>

@@ -10,37 +10,44 @@
         <link rel="stylesheet" href="/css/builder.css">
     </head>
     <body>
-        <nav>
-            <ul class="nav">
-                <li class="nav-logo">
-                    <a href="/"><img src="/assets/CareerCenter.png" alt="Your Logo" /></a>
-                </li>
-                <div class="nav-items">
-                <li><div class="dropdown"><a class="navtext" href="/directory">
-                  HOME
-                  </a>
-                  <div class="dropdown-content">
-                    <a href="/directory#About-Us">About Us</a>
-                    <a href="/directory#Contact-Us">Contact Us</a>
-                  </div>
-                </div>
-                </li>
-                <li><div class="dropdown"><a class="navtext" href="#">
-                  SERVICES
-                  </a>
-                  <div class="dropdown-content">
-                    <a href="/counseling">Counseling</a>
-                    <a href="/ojt-search">OJT Search</a>
-                    <a href="/interview">Interview Simulation</a>
-                    <a href="/builder">Builder</a>
-                  </div>
-                </div>
-                </li>
-                <li><a class="navtext" href="/user/profile">Profile</a></li>
-                <li><a class="navtext" href="/logout">Logout</a></li>
-                </div>
-            </ul>
-        </nav>
+        <header class="header sticky">
+            <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+        
+             <nav class="main-nav">
+                 
+        
+                 <ul class="nav-items">
+                
+                     <li><div class="dropdown"><a class="navtext" href="/directory">
+                   HOME
+                 </a>
+                 <div class="dropdown-content">
+                     <a href="#About-Us">About Us</a>
+                     <a href="#Contact-Us">Contact Us</a>
+                 </div>
+             </div>
+         </li>
+         <li><div class="dropdown"><a class="navtext" href="#">
+             SERVICES
+         </a>
+         <div class="dropdown-content">
+                     <a href="/counseling">Counseling</a>
+                     <a href="/ojt-search">OJT Search</a>
+                     <a href="/interview">Interview Simulation</a>
+                     <a href="/builder">Builder</a>
+                 </div>
+             </div>
+         </li>
+         <li><a class="navtext" href="/user/profile">Profile</a></li>
+         <li><a class="navtext" href="/logout">Logout</a></li>
+        </ul>
+        
+         </nav>
+         <button class="btn-mobile-nav">
+             <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+             <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+         </button>
+        </header>
 
     
         <div class="upper-description">
@@ -510,7 +517,38 @@ updateButtonPosition(); // Initialize position
 </div>
 </main>
 
+<script>
+    const btnNavEl = document.querySelector(".btn-mobile-nav");
+const headerEl = document.querySelector(".header");
+
+btnNavEl.addEventListener('click', function () {
+    headerEl.classList.toggle("nav-open");
+})
+
+// stick
+
+const sectionUpperEl = document.querySelector(".description-bg-image");
+
+const obs = new IntersectionObserver(
+function (entries) {
+const ent = entries[0];
+console.log(ent);
+
+if (ent.isIntersecting === false)
+document.body.classList.add('sticky');
+else
+document.body.classList.remove('sticky');
+},
+{
+root: null,
+threshold: 0,
+}
+);
+obs.observe(sectionUpperEl);
+</script>
         <!-- jquery cdn -->
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
         <!-- jquery repeater cdn -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
