@@ -1,5 +1,6 @@
 let recognition;
 let isListening = false;
+let userMessageInput = document.getElementById('user-prompt');
 let timeoutId;
 
 // Check if the browser supports the Web Speech API
@@ -15,21 +16,32 @@ recognition.continuous = true;  // Enable continuous recognition
 recognition.interimResults = true;  // Enable interim results
 recognition.lang = "en-US";
 
-recognition.onresult = function(e) {
-  const userMessageInput = document.getElementById('user-prompt');
-  const latestResult = e.results[e.results.length - 1][0].transcript;
-  userMessageInput.value = latestResult;
+recognition.onresult = function (e) {
+  let finalResult = '';
+  for (let i = e.resultIndex; i < e.results.length; i++) {
+    const transcript = e.results[i][0].transcript;
+    if (e.results[i].isFinal) {
+      finalResult += transcript + ' ';
+    }
+  }
+
+  finalResult = finalResult.trim();
+
+  if (finalResult !== '') {
+    userMessageInput.value += (userMessageInput.value.trim() === '' ? '' : ' ') + finalResult;
+  }
 
   // Clear the existing timeout
   clearTimeout(timeoutId);
 
-  // Set a new timeout to stop recognition after a pause (e.g., 2 seconds)
+  // Set a new timeout to restart recognition after an interim result (e.g., 2 seconds)
   timeoutId = setTimeout(() => {
-    stopDictation();
-  }, 8000);
+    startDictation();
+  }, 2000);
 };
 
-recognition.onerror = function(e) {
+
+recognition.onerror = function (e) {
   stopDictation();
 };
 
@@ -39,12 +51,11 @@ function startDictation() {
     isListening = true;
     // Change the button color to indicate it's listening
     document.getElementById('micButton').style.backgroundColor = "red";
-  } else {
-    stopDictation();
   }
 }
 
 function stopDictation() {
+  clearTimeout(timeoutId);  // Clear the timeout to prevent restarting recognition
   recognition.stop();
   isListening = false;
   // Reset the button color
