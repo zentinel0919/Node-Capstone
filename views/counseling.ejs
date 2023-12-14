@@ -92,7 +92,6 @@
     <section class="meeting-queue">
       <h2>Meeting Queue</h2>
       <div class="search-filter-group">
-    </div>
       <div class="pagination-buttons">
         <input type="date" id="searchDateInput" placeholder="Search by date...">
         <input type="text" id="searchPurposeInput" placeholder="Search by purpose...">
@@ -101,7 +100,7 @@
           <button class="page-button" data-page="pending">Pending</button>
           <button class="page-button" data-page="done">History</button>
       </div>
-  
+      <div class="queue-list">
       <div class="meeting-page active" id="confirmed">
           <ul>
               <% meetings.filter(m => m.isConfirm && !m.isDone).forEach(meeting => { %>
@@ -143,9 +142,9 @@
             <% }) %>
         </ul>
     </div>
-
+</div>
+</div>
   </section>
-  
     
         </div>
     
@@ -156,14 +155,22 @@ document.getElementById('searchFilterBtn').addEventListener('click', function() 
     var searchPurpose = document.getElementById('searchPurposeInput').value.toLowerCase();
     
     // Convert date to ISO string and then to date-only format
-    searchDate = searchDate ? new Date(searchDate).toISOString().split('T')[0] : '';
+    function formatDateToDBFormat(date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}/${month}/${day}`;
+  }
+
+searchDate = searchDate ? formatDateToDBFormat(new Date(searchDate)) : '';
+
 
     // Get all the meeting list items
     var meetingItems = document.querySelectorAll('.meeting-page.active ul li');
     
     meetingItems.forEach(function(meeting) {
         var meetingDateText = meeting.querySelector('strong').nextSibling.textContent;
-        var meetingDate = meetingDateText.substring(0, meetingDateText.indexOf('Start Time:')).trim();
+        var meetingDate = formatDateToDBFormat(new Date(meetingDateText.split('Start Time:')[0].trim()));
         var meetingPurposeText = meeting.querySelector('strong:nth-of-type(4)').nextSibling.textContent;
         var meetingPurpose = meetingPurposeText.toLowerCase().trim();
 

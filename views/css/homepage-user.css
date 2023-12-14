@@ -50,7 +50,7 @@ html {
         align-items: center;
         background-color: #ffd43b;
         padding: 0 1.5rem 0 3rem;
-        margin-bottom: 5rem;
+        margin-bottom: 2rem;
         position: relative;
 }
 
@@ -558,7 +558,7 @@ button:hover {
         padding-bottom: 4%;
     }
     .container {
-        grid-template-columns: 80%;
+        grid-template-columns: 95%;
     }
     .width{
         height: auto;
@@ -566,6 +566,46 @@ button:hover {
     }
     .logo-img {
         display: none;
+    }
+
+    .upper-homepage {
+        margin-top: 1%;
+    }
+
+    .announcement p{
+        font-size: smaller;
+    }
+
+    .ann-header
+    ,.div-title {
+        font-size: smaller;
+    }
+
+    .announcement {
+        padding: 5px;
+    }
+
+    .announcement-board {
+        height: 30rem;
+    }
+    
+    .hello-text {
+        font-size: smaller;
+    }
+
+    .main-image {
+        height: 15rem;
+        width: 25rem;
+    }
+
+    .upperimage {
+        height: 17rem;
+    }
+
+    .about-1st-section,
+    .about-2nd-section,
+    .about-3nd-section {
+        font-size: smaller;
     }
 
 }
@@ -710,7 +750,6 @@ button:hover {
     border: none;
     background-color: #ffd43b;
     cursor: pointer;
-
     display: none;
 }
 

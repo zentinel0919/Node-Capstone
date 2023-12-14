@@ -14,9 +14,8 @@ body {
 }
 
 img {
-  width: 50%; /* makes the image stretch to cover the width */
-  height: auto; /* adjusts height automatically to maintain aspect ratio */
-  object-fit: cover;
+  height: 30rem;
+  width: auto;
 }
 
 /* Adjust margins to crop the top/left of the image, if necessary */
@@ -32,7 +31,6 @@ img {
     align-items: center;
     padding: 1.3rem 5%;
     background-color: #333;
-  
 }
 
 li {
@@ -42,16 +40,15 @@ li {
 
 .btn-mobile-nav {
   border: none;
-  background-color: #1d1c1b;
+  background-color: #161615;
   cursor: pointer;
-
   display: none;
 }
 
 .icon-mobile-nav {
   height: 2.8rem;
   width: 2.8rem;
-  color: #333;
+  color: #dad0d0;
 
 }
 
@@ -61,13 +58,49 @@ li {
 
 @media (max-width: 800px) {
 
+  .interaction-container {
+    flex-direction: column;
+
+  }
+
+  .description {
+    font-size: smaller;
+  }
+
+  .animation img {
+    height: 10rem;
+    width: auto;
+  }
+
+  .modal {
+    width: 80%;
+  }
+  
+  .crop-container {
+    display: none;
+  }
+
+  .navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
+    background-color: #b5bccc;
+    color: #161515;
+    border-radius: 90px;
+    transition: all 0.3s;
+    font-size: larger;
+    box-shadow: 0px 5px 5px 0px black;
+    text-decoration: none;
+  }
+
+  .navtext:link {
+    color: #1d1b1b;
+  }
+
   .btn-mobile-nav {
       display: block;
       z-index: 9999;
   }
 
   .main-nav {
-      background-color: rgba(255, 255, 255, 0.97);
+      background-color: rgba(59, 57, 57, 0.97);
       position: absolute;
       top: 0;
       left: 0;
@@ -81,6 +114,14 @@ li {
       transition: all 0.5s;
       opacity: 0;
       pointer-events: none;
+      visibility: hidden;
+  }
+
+  .interaction-container {
+    grid-template-columns: 1fr;
+  }
+
+  .career-image{
       visibility: hidden;
   }
 
@@ -106,13 +147,11 @@ li {
 }
 
 .header {
-    
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1d1c1b;
+  background-color: #161615;
   padding: 0 1.5rem 0 3rem;
-
   position: relative;
 }
 
@@ -121,16 +160,12 @@ li {
   width: 13.8rem;
   height: 5rem;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.199);
-  }
+}
 
-  .nav-items {
-    display: flex;
-    justify-content: flex-end; /* This will push the navtext to the right */
-    align-items: center; /* This will vertically center the items */
-    }
-
-.nav-item {
-    position: relative;
+.nav-items {
+  display: flex;
+  justify-content: flex-end; /* This will push the navtext to the right */
+  align-items: center; /* This will vertically center the items */
 }
 
 .navtext:active, .navtext:hover, .dropdown:hover .dropbtn  {
@@ -146,7 +181,7 @@ li {
 .navtext:link, a:visited {
   text-decoration: none;
   text-transform: uppercase;
-  color: #fcf9f9;
+  color: #ece2e2;
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -493,9 +528,8 @@ button:hover {
 }
 
 .interaction-container{
-  display: grid;
+  display: flex;
   margin-top: 3%;
-  grid-template-columns: 2fr 50%;
   background-color: #8FB4BD;
   border-radius: 30px;
   padding: 2%;
@@ -504,8 +538,6 @@ button:hover {
 
 #avatar-image{
   border-radius: 360%;
-  height: 30rem;
-  width: auto;
   padding: 5%;
   box-shadow: -4px -4px 1px 1px rgb(95, 89, 89);
   transition: transform 0.2s ease-in-out;
@@ -513,6 +545,7 @@ button:hover {
 
 .chat-wrapper{
   margin-bottom: 2%;
+  width: 100%;
 }
 
 .animation {

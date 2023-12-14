@@ -149,13 +149,11 @@ li {
     grid-template-columns: 32.1% 32.1% 32.1%;
     flex-wrap: wrap;
     gap: 20px;
-    height: 45rem;
-    overflow-y: auto;
 }
 
 .job-item {
     flex: 1;
-    background-color: #eef3f2;
+    background-color: rgb(214, 222, 224);;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -177,9 +175,9 @@ li {
     color: #4169e1;
 }
 
-.job-company, .job-program {
+.job-company, .job-program, .job-location {
     margin-top: 10px;
-    color: #777;
+    color: #585858;
 }
 
 .favorite-button {
@@ -261,6 +259,11 @@ li {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.recommendation {
+    height: 20%;
+}
+
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
@@ -350,6 +353,7 @@ li {
         opacity: 0;
         pointer-events: none;
         visibility: hidden;
+        z-index: 2;
     }
   
     .nav-open .main-nav {
@@ -376,6 +380,11 @@ li {
 }
 
 @media (max-width:700px) {
+
+    .upper-description{
+        font-size: smaller;
+    }
+
     .grids {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;

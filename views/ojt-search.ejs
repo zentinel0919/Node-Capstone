@@ -71,6 +71,7 @@
                 </p>
                 <p class="job-company">Company: <%= job.company %></p>
                 <p class="job-program">Program: <%= job.program %></p>
+                <p class="job-location">Location: <%= job.location %></p>
                 <button class="favorite-button" onclick="addToFavorite('<%= job.id %>')">
                   <i class="favorite-icon">Save to Favorite</i>
                 </button>
@@ -82,7 +83,7 @@
         
   
   <h2>Job List</h2><br>
-  <input type="text" id="searchInput" placeholder="Search by company or job title" onkeyup="filterJobs()">
+  <input type="text" id="searchInput" placeholder="Search by company, title or location" onkeyup="filterJobs()">
   <div class="recommendation">
   <div class="job-list">
     <% jobs.forEach(function(job) { %>
@@ -93,6 +94,7 @@
             </p>
           <p class="job-company">Company: <%= job.company %></p>
           <p class="job-program">Program: <%= job.program %></p>
+          <p class="job-location">Location: <%= job.location %></p>
           <button class="favorite-button"  onclick="addToFavorite('<%= job.id %>')">
             <i class="favorite-icon">Save to Favorite</i>
         </div>

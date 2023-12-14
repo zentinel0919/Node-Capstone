@@ -10,43 +10,43 @@
 
 <body>
     <header class="header">
-       <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
-
-        <nav class="main-nav">
+        <img class="nav-logo" src="/assets/CareerCenter.png" alt="Your Logo" />
+ 
+         <nav class="main-nav">
+             
+ 
+             <ul class="nav-items">
             
-
-            <ul class="nav-items">
-           
-                <li><div class="dropdown"><a class="navtext" href="/directory">
-              HOME
-            </a>
-            <div class="dropdown-content">
-                <a href="#About-Us">About Us</a>
-                <a href="#Contact-Us">Contact Us</a>
-            </div>
-        </div>
-    </li>
-    <li><div class="dropdown"><a class="navtext" href="#">
-        SERVICES
-    </a>
-    <div class="dropdown-content">
-                <a href="/counseling">Counseling</a>
-                <a href="/ojt-search">OJT Search</a>
-                <a href="/interview">Interview Simulation</a>
-                <a href="/builder">Builder</a>
-            </div>
-        </div>
-    </li>
-    <li><a class="navtext" href="/user/profile">Profile</a></li>
-    <li><a class="navtext" href="/logout">Logout</a></li>
-</ul>
-
-    </nav>
-    <button class="btn-mobile-nav">
-        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-    </button>
-</header>
+                 <li><div class="dropdown"><a class="navtext" href="/directory">
+               HOME
+             </a>
+             <div class="dropdown-content">
+                 <a href="#About-Us">About Us</a>
+                 <a href="#Contact-Us">Contact Us</a>
+             </div>
+         </div>
+     </li>
+     <li><div class="dropdown"><a class="navtext" href="#">
+         SERVICES
+     </a>
+     <div class="dropdown-content">
+                 <a href="/counseling">Counseling</a>
+                 <a href="/ojt-search">OJT Search</a>
+                 <a href="/interview">Interview Simulation</a>
+                 <a href="/builder">Builder</a>
+             </div>
+         </div>
+     </li>
+     <li><a class="navtext" href="/user/profile">Profile</a></li>
+     <li><a class="navtext" href="/logout">Logout</a></li>
+ </ul>
+ 
+     </nav>
+     <button class="btn-mobile-nav">
+         <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+         <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+     </button>
+ </header>
 
 
     <div class="modal-overlay" id="disclaimer-modal-overlay"></div>
@@ -100,6 +100,37 @@
 <div id="response"></div>
 </body>
 
+<script>
+            const btnNavEl = document.querySelector(".btn-mobile-nav");
+        const headerEl = document.querySelector(".header");
+
+        btnNavEl.addEventListener('click', function () {
+            headerEl.classList.toggle("nav-open");
+        })
+
+        // stick
+
+ const sectionUpperEl = document.querySelector(".hello-homepage");
+
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    console.log(ent);
+
+    if (ent.isIntersecting === false)
+      document.body.classList.add('sticky');
+    else
+      document.body.classList.remove('sticky');
+  },
+  {
+    root: null,
+    threshold: 0,
+  }
+);
+obs.observe(sectionUpperEl);
+</script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/js/interview-simulation.js" defer></script>
 
 </html>

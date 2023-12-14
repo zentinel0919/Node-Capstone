@@ -46,7 +46,6 @@ bottom: 0;
    grid-template-columns: 1fr 1fr;
    margin: 0 auto;
    margin-top: 6%;
-
 }
 
 .yellow {
@@ -287,6 +286,11 @@ select.form-control {
 }
 
 @media (max-width: 850px) {
+
+  .container {
+    display: inline;
+  }
+
   body {
     display: flex;
     justify-content: center;
