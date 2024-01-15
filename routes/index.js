@@ -574,6 +574,13 @@ function generateRandomToken() {
   return crypto.randomBytes(32).toString('hex');
 }
 
+function isValidTipEmail(email) {
+  // Regular expression to check if the email has the format @tip.edu.ph
+  var emailRegex = /^[a-zA-Z0-9._-]+@tip\.edu\.ph$/;
+  return emailRegex.test(email);
+}
+
+
 //REGISTER
 router.post('/', async function (req, res, next) {
   console.log(req.body);
@@ -589,6 +596,12 @@ router.post('/', async function (req, res, next) {
   if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
     res.send();
   } else {
+
+    if (!isValidTipEmail(personInfo.email)) {
+      res.send({ Success: 'Invalid email format. Please use a @tip.edu.ph email.' });
+      return;
+    }
+
     // Encrypt the password before storing it
     var encryptedPassword = encrypt(personInfo.password);
 

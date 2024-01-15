@@ -222,7 +222,46 @@ function previewImage(){
     }
 }
 
+
+function validateForm() {
+    const aboutForm = document.getElementById('cv-form');
+
+    // Array of required fields within the Profile section
+    const profileFields = ['firstname', 'lastname', 'designation', 'address', 'email', 'phoneno'];
+
+    // Check if all required fields within the Profile section are filled
+    for (const fieldName of profileFields) {
+        const fieldElem = aboutForm.querySelector(`[name="${fieldName}"]`);
+        const fieldValue = fieldElem ? fieldElem.value.trim() : '';
+        if (fieldValue === '') {
+            console.error(`${fieldName} is required.`);
+            return false;
+        }
+    }
+
+    // Array of required fields within the Educational Background section
+    const eduRepeaterItems = aboutForm.querySelectorAll('.repeater[data-repeater-list="group-c"] [name^="edu_"]');
+    for (const eduItem of eduRepeaterItems) {
+        const fieldValue = eduItem.value.trim();
+        if (fieldValue === '') {
+            console.error(`Educational background: All fields are required.`);
+            return false;
+        }
+    }
+
+    // If all required fields are filled, return true
+    return true;
+}
+
+
 // print CV
 function printCV(){
+
+    if (!validateForm()) {
+        // If validation fails, don't proceed with the print action
+        return;
+    }
+
+    console.log('Printing CV...');
     window.print();
 }
