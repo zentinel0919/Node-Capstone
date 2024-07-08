@@ -164,26 +164,21 @@ function determineIfUserIsAdminSomehow(req) {
 
 
 const algorithm = 'aes-192-cbc';
-const secretKey = 'your-secret-key'; // Ensure this key is exactly 24 bytes
-const iv = crypto.randomBytes(16);
+const key = crypto.scryptSync('your-secret-key', 'salt', 24); // Use a key derivation function
+const iv = Buffer.alloc(16, 0); // Initialization vector
 
 // Caesar cipher encryption function
 function encrypt(plaintext) {
-  const key = crypto.scryptSync(secretKey, 'salt', 24);
   const cipher = crypto.createCipheriv(algorithm, key, iv);
   let encrypted = cipher.update(plaintext, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  return iv.toString('hex') + ':' + encrypted;
+  return encrypted;
 }
 
 // Caesar cipher decryption function
 function decrypt(ciphertext) {
-  const key = crypto.scryptSync(secretKey, 'salt', 24);
-  const parts = ciphertext.split(':');
-  const iv = Buffer.from(parts.shift(), 'hex');
-  const encryptedText = parts.join(':');
   const decipher = crypto.createDecipheriv(algorithm, key, iv);
-  let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+  let decrypted = decipher.update(ciphertext, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;
 }
