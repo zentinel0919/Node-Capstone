@@ -163,18 +163,27 @@ function determineIfUserIsAdminSomehow(req) {
 }
 
 
+const algorithm = 'aes-192-cbc';
+const secretKey = 'your-secret-key'; // Ensure this key is exactly 24 bytes
+const iv = crypto.randomBytes(16);
+
 // Caesar cipher encryption function
 function encrypt(plaintext) {
-  var cipher = crypto.createCipher('aes192', 'your-secret-key');
-  var encrypted = cipher.update(plaintext, 'utf8', 'hex');
+  const key = crypto.scryptSync(secretKey, 'salt', 24);
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(plaintext, 'utf8', 'hex');
   encrypted += cipher.final('hex');
-  return encrypted;
+  return iv.toString('hex') + ':' + encrypted;
 }
 
 // Caesar cipher decryption function
 function decrypt(ciphertext) {
-  var decipher = crypto.createDecipher('aes192', 'your-secret-key');
-  var decrypted = decipher.update(ciphertext, 'hex', 'utf8');
+  const key = crypto.scryptSync(secretKey, 'salt', 24);
+  const parts = ciphertext.split(':');
+  const iv = Buffer.from(parts.shift(), 'hex');
+  const encryptedText = parts.join(':');
+  const decipher = crypto.createDecipheriv(algorithm, key, iv);
+  let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;
 }
